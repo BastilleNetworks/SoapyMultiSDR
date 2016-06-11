@@ -96,6 +96,13 @@ size_t SoapyMultiSDR::getNumChannels(const int direction) const
     return map.size();
 }
 
+SoapySDR::Kwargs SoapyMultiSDR::getChannelInfo(const int direction, size_t channel) const
+{
+    size_t localChannel = 0;
+    auto device = this->getDevice(direction, channel, localChannel);
+    return device->getChannelInfo(direction, localChannel);
+}
+
 bool SoapyMultiSDR::getFullDuplex(const int direction, const size_t channel) const
 {
     size_t localChannel = 0;
